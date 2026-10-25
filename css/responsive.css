@@ -1,0 +1,154 @@
+/* ==========================================================================
+   ACCESSWAY SG - RESPONSIVE CASCADE & BREAKPOINTS (css/responsive.css)
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Mobile Phone Baseline (< 768px Viewports)
+   -------------------------------------------------------------------------- */
+@media (max-width: 767.98px) {
+  .app-grid-shell {
+    display: block !important;
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  /* Hide static sidebar on mobile screens */
+  .sidebar-panel {
+    display: none !important;
+  }
+
+  /* Map canvas expands to full-screen background layer */
+  .map-viewport {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+  }
+
+  .btn-fab-report {
+    bottom: 24px;
+    right: 20px;
+  }
+
+  .leaflet-top.leaflet-right {
+    top: 60px !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   2. Tablet Viewports (768px - 1279.98px)
+   -------------------------------------------------------------------------- */
+@media (min-width: 768px) and (max-width: 1279.98px) {
+  .app-grid-shell {
+    display: grid !important;
+    grid-template-columns: 320px 1fr !important;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .sidebar-panel {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 320px !important;
+    min-width: 320px !important;
+    max-width: 320px !important;
+    flex-shrink: 0 !important;
+    height: 100vh !important;
+    background-color: #ffffff;
+    z-index: 1000;
+    overflow: hidden;
+  }
+
+  .map-viewport {
+    width: 100% !important;
+    height: 100vh !important;
+    position: relative;
+    z-index: 1;
+  }
+
+  .floating-map-header,
+  .offcanvas-bottom.custom-bottom-sheet {
+    display: none !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   3. Desktop Viewports (1280px+)
+   -------------------------------------------------------------------------- */
+@media (min-width: 1280px) {
+  .app-grid-shell {
+    display: grid !important;
+    grid-template-columns: 380px 1fr !important;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .sidebar-panel {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 380px !important;
+    min-width: 380px !important;
+    max-width: 380px !important;
+    flex-shrink: 0 !important;
+    height: 100vh !important;
+    background-color: #ffffff;
+    z-index: 1000;
+    overflow: hidden;
+  }
+
+  .map-viewport {
+    width: 100% !important;
+    height: 100vh !important;
+    position: relative;
+    z-index: 1;
+  }
+
+  .floating-map-header,
+  .offcanvas-bottom.custom-bottom-sheet {
+    display: none !important;
+  }
+
+  .btn-fab-report {
+    bottom: 32px;
+    right: 32px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   4. Widescreen Viewports (1920px+)
+   -------------------------------------------------------------------------- */
+@media (min-width: 1920px) {
+  body {
+    background-color: var(--slate-900, #0f172a);
+    display: flex;
+    justify-content: center;
+  }
+
+  .app-grid-shell {
+    max-width: 1440px;
+    margin: 0 auto;
+    box-shadow: var(--shadow-lg, 0 10px 25px rgba(15, 23, 42, 0.15));
+    border-left: 1px solid var(--slate-700, #334155);
+    border-right: 1px solid var(--slate-700, #334155);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   5. Reduced Motion Accessibility
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

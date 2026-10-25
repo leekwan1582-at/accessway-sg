@@ -1,0 +1,153 @@
+{
+  "defaultDemoRoute": {
+    "routeId": "demo_dhoby_to_plazasg_001",
+    "title": "Dhoby Ghaut MRT (Exit B) to Plaza Singapura",
+    "description": "Primary wheelchair-accessible first-mile transit corridor along Orchard Road.",
+    "start": {
+      "name": "Dhoby Ghaut MRT Station (Exit B)",
+      "lat": 1.298523,
+      "lng": 103.845214
+    },
+    "destination": {
+      "name": "Plaza Singapura Main Entrance",
+      "lat": 1.300184,
+      "lng": 103.844781
+    },
+    "totalDistanceMeters": 380,
+    "totalDurationMinutes": 5,
+    "confidenceScore": "High (100% Barrier Free)",
+    "hasHazards": false,
+    "coordinates": [
+      [1.298523, 103.845214],
+      [1.298810, 103.845100],
+      [1.299150, 103.844980],
+      [1.299620, 103.844880],
+      [1.300184, 103.844781]
+    ],
+    "segments": [
+      {
+        "segmentId": "seg_1",
+        "safety": "SAFE",
+        "coordinates": [
+          [1.298523, 103.845214],
+          [1.298810, 103.845100],
+          [1.299150, 103.844980]
+        ]
+      },
+      {
+        "segmentId": "seg_2",
+        "safety": "SAFE",
+        "coordinates": [
+          [1.299150, 103.844980],
+          [1.299620, 103.844880],
+          [1.300184, 103.844781]
+        ]
+      }
+    ],
+    "instructions": [
+      {
+        "stepIndex": 1,
+        "instructionText": "Head north on footway from Dhoby Ghaut MRT Exit B towards Handy Road.",
+        "distanceMeters": 120,
+        "warningType": null,
+        "stepCoordinates": [1.298523, 103.845214]
+      },
+      {
+        "stepIndex": 2,
+        "instructionText": "Use low-gradient curb ramp to cross the sheltered plaza walkway.",
+        "distanceMeters": 110,
+        "warningType": null,
+        "stepCoordinates": [1.299150, 103.844980]
+      },
+      {
+        "stepIndex": 3,
+        "instructionText": "Arrive at Plaza Singapura Level 1 automatic glass sliding doors.",
+        "distanceMeters": 150,
+        "warningType": null,
+        "stepCoordinates": [1.300184, 103.844781]
+      }
+    ],
+    "hazards": []
+  },
+  "hazardDemoRoute": {
+    "routeId": "demo_somerset_to_313_hazard_002",
+    "title": "Somerset MRT to 313@somerset (Incline & Step Warning)",
+    "description": "Secondary route containing physical friction elements used for testing screening algorithms.",
+    "start": {
+      "name": "Somerset MRT Station (Exit A)",
+      "lat": 1.300210,
+      "lng": 103.839070
+    },
+    "destination": {
+      "name": "313@somerset Taxi Stand",
+      "lat": 1.301050,
+      "lng": 103.838420
+    },
+    "totalDistanceMeters": 240,
+    "totalDurationMinutes": 4,
+    "confidenceScore": "Caution Required (Steep Slope Detected)",
+    "hasHazards": true,
+    "coordinates": [
+      [1.300210, 103.839070],
+      [1.300520, 103.838810],
+      [1.300810, 103.838600],
+      [1.301050, 103.838420]
+    ],
+    "segments": [
+      {
+        "segmentId": "seg_1",
+        "safety": "SAFE",
+        "coordinates": [
+          [1.300210, 103.839070],
+          [1.300520, 103.838810]
+        ]
+      },
+      {
+        "segmentId": "seg_2",
+        "safety": "WARNING",
+        "coordinates": [
+          [1.300520, 103.838810],
+          [1.300810, 103.838600]
+        ]
+      },
+      {
+        "segmentId": "seg_3",
+        "safety": "SAFE",
+        "coordinates": [
+          [1.300810, 103.838600],
+          [1.301050, 103.838420]
+        ]
+      }
+    ],
+    "instructions": [
+      {
+        "stepIndex": 1,
+        "instructionText": "Exit Somerset MRT concourse towards Orchard Road footway.",
+        "distanceMeters": 80,
+        "warningType": null,
+        "stepCoordinates": [1.300210, 103.839070]
+      },
+      {
+        "stepIndex": 2,
+        "instructionText": "Caution: Steep incline (>8% gradient) near outdoor plaza connection.",
+        "distanceMeters": 90,
+        "warningType": "STEEP_SLOPE",
+        "stepCoordinates": [1.300520, 103.838810]
+      },
+      {
+        "stepIndex": 3,
+        "instructionText": "Arrive at 313@somerset drop-off point.",
+        "distanceMeters": 70,
+        "warningType": null,
+        "stepCoordinates": [1.301050, 103.838420]
+      }
+    ],
+    "hazards": [
+      {
+        "stepIndex": 2,
+        "type": "Steep Gradient (>8%)",
+        "text": "Caution: Steep incline (>8% gradient) near outdoor plaza connection."
+      }
+    ]
+  }
+}

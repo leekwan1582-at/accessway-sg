@@ -1,0 +1,150 @@
+/* ==========================================================================
+   ACCESSWAY SG - LEAFLET MAP & SPATIAL STYLES (css/map.css)
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Leaflet Container & Canvas Mechanics
+   -------------------------------------------------------------------------- */
+#map-container {
+  width: 100%;
+  height: 100%;
+  background-color: var(--slate-100, #f1f5f9);
+  z-index: 1;
+}
+
+/* Custom Grayscale Map Filter Effect (Optional clean cartography tone) */
+.leaflet-container {
+  font-family: var(--font-sans, 'Inter', sans-serif) !important;
+}
+
+/* --------------------------------------------------------------------------
+   2. Zoom Controls & Custom Map Control Placement
+   -------------------------------------------------------------------------- */
+.leaflet-control-zoom {
+  border: none !important;
+  box-shadow: var(--shadow-md, 0 4px 12px rgba(15, 23, 42, 0.10)) !important;
+  border-radius: var(--radius-md, 12px) !important;
+  overflow: hidden;
+  margin-top: 16px !important;
+  margin-right: 16px !important;
+}
+
+.leaflet-control-zoom-in,
+.leaflet-control-zoom-out {
+  background-color: #ffffff !important;
+  color: var(--slate-900, #0f172a) !important;
+  width: var(--min-touch-target, 44px) !important;
+  height: var(--min-touch-target, 44px) !important;
+  line-height: var(--min-touch-target, 44px) !important;
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  border-bottom: 1px solid var(--slate-200, #e2e8f0) !important;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.leaflet-control-zoom-in:hover,
+.leaflet-control-zoom-out:hover {
+  background-color: var(--slate-100, #f1f5f9) !important;
+  color: var(--primary-green, #1b7a4b) !important;
+}
+
+/* --------------------------------------------------------------------------
+   3. Custom Facility Pins & Hazard Markers
+   -------------------------------------------------------------------------- */
+/* Facility Pin Base */
+.custom-facility-marker .marker-pin {
+  width: 36px;
+  height: 36px;
+  border-radius: 50% 50% 50% 0;
+  position: absolute;
+  transform: rotate(-45deg);
+  left: 50%;
+  top: 50%;
+  margin: -18px 0 0 -18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-md, 0 4px 12px rgba(15, 23, 42, 0.10));
+  border: 2px solid #ffffff;
+}
+
+.custom-facility-marker .marker-pin i {
+  transform: rotate(45deg);
+  font-size: 16px;
+}
+
+/* Hazard Warning Pin Base */
+.custom-hazard-pin .hazard-pin-bubble {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 3px solid #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-lg, 0 10px 25px rgba(15, 23, 42, 0.15));
+  animation: pulse-hazard 2s infinite;
+}
+
+@keyframes pulse-hazard {
+  0% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.4); }
+  70% { box-shadow: 0 0 0 10px rgba(220, 38, 38, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
+}
+
+/* --------------------------------------------------------------------------
+   4. Custom Popup Cards & Tip Overrides
+   -------------------------------------------------------------------------- */
+.custom-leaflet-popup .leaflet-popup-content-wrapper,
+.custom-barrier-popup .leaflet-popup-content-wrapper {
+  background-color: #ffffff;
+  border-radius: var(--radius-md, 12px);
+  padding: var(--space-2, 0.5rem);
+  box-shadow: var(--shadow-lg, 0 10px 25px rgba(15, 23, 42, 0.15));
+  border: 1px solid var(--slate-200, #e2e8f0);
+}
+
+.custom-leaflet-popup .leaflet-popup-content,
+.custom-barrier-popup .leaflet-popup-content {
+  margin: var(--space-2, 0.5rem) var(--space-3, 1rem);
+  line-height: 1.4;
+}
+
+.custom-leaflet-popup .leaflet-popup-tip,
+.custom-barrier-popup .leaflet-popup-tip {
+  background-color: #ffffff;
+}
+
+.popup-title {
+  color: var(--slate-900, #0f172a);
+  font-weight: 700;
+}
+
+/* --------------------------------------------------------------------------
+   5. MarkerCluster Plugin Custom Styling
+   -------------------------------------------------------------------------- */
+.custom-cluster-marker .accessway-cluster {
+  width: 40px;
+  height: 40px;
+  background-color: var(--primary-green, #1b7a4b);
+  border: 3px solid #ffffff;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 14px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-md, 0 4px 12px rgba(15, 23, 42, 0.10));
+}
+
+/* --------------------------------------------------------------------------
+   6. Floating Mobile Map Controls
+   -------------------------------------------------------------------------- */
+.floating-map-header {
+  pointer-events: none;
+}
+
+.floating-map-header * {
+  pointer-events: auto;
+}

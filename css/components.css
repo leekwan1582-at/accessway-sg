@@ -1,0 +1,207 @@
+/* ==========================================================================
+   ACCESSWAY SG - CUSTOMIZED COMPONENTS (css/components.css)
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Primary & Action Buttons (Anti-Bootstrap Default Overrides)
+   -------------------------------------------------------------------------- */
+/* Primary Brand Button (Replaces default Bootstrap #0d6efd blue) */
+.btn-primary-accessway {
+  background-color: var(--primary-green, #1b7a4b);
+  border-color: var(--primary-green, #1b7a4b);
+  color: #ffffff;
+  min-height: var(--min-touch-target, 44px);
+  padding: var(--space-2, 0.5rem) var(--space-4, 1.5rem);
+  border-radius: var(--radius-sm, 8px);
+  font-family: var(--font-sans, 'Inter', sans-serif);
+  font-weight: 600;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.1s ease;
+}
+
+.btn-primary-accessway:hover,
+.btn-primary-accessway:focus {
+  background-color: var(--primary-green-hover, #135835);
+  border-color: var(--primary-green-hover, #135835);
+  color: #ffffff;
+  box-shadow: var(--shadow-md, 0 4px 12px rgba(15, 23, 42, 0.10));
+}
+
+.btn-primary-accessway:active {
+  transform: scale(0.98);
+}
+
+/* Floating Action Button (FAB) for Community Barrier Reporting */
+.btn-fab-report {
+  width: 56px;
+  height: 56px;
+  min-height: 56px;
+  padding: 0;
+  box-shadow: var(--shadow-lg, 0 10px 25px rgba(15, 23, 42, 0.15));
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.btn-fab-report:hover {
+  transform: scale(1.08);
+}
+
+/* Extra-small action button utility */
+.btn-xs {
+  min-height: 32px;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  line-height: 1.2;
+  border-radius: var(--radius-sm, 8px);
+}
+
+/* --------------------------------------------------------------------------
+   2. Expandable Mobile Bottom Sheet (Offcanvas Adaptation)
+   -------------------------------------------------------------------------- */
+.offcanvas-bottom.custom-bottom-sheet {
+  border-top-left-radius: var(--radius-xl, 24px);
+  border-top-right-radius: var(--radius-xl, 24px);
+  border-top: 1px solid var(--slate-200, #e2e8f0);
+  box-shadow: var(--shadow-lg, 0 10px 25px rgba(15, 23, 42, 0.15));
+  background-color: #ffffff;
+  transition: height 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Physical Drag Handle Accent */
+.sheet-drag-handle {
+  width: 48px;
+  height: 5px;
+  background-color: var(--slate-200, #e2e8f0);
+  border-radius: 999px;
+  margin: var(--space-2, 0.5rem) auto;
+  cursor: grab;
+}
+
+.sheet-drag-handle:active {
+  cursor: grabbing;
+  background-color: var(--slate-500, #64748b);
+}
+
+/* Bottom Sheet Height Modes */
+.custom-bottom-sheet.mode-collapsed {
+  height: 30vh !important;
+  overflow: hidden;
+}
+
+.custom-bottom-sheet.mode-expanded {
+  height: 80vh !important;
+  overflow-y: auto;
+}
+
+/* --------------------------------------------------------------------------
+   3. Community Barrier Report Modals & Backdrop Blur
+   -------------------------------------------------------------------------- */
+.modal-content.custom-modal {
+  border: none;
+  border-radius: var(--radius-lg, 16px);
+  box-shadow: var(--shadow-lg, 0 10px 25px rgba(15, 23, 42, 0.15));
+  overflow: hidden;
+}
+
+.modal-header.hazard-header {
+  background-color: var(--hazard-red-light, #fee2e2);
+  border-bottom: 2px solid var(--hazard-red, #dc2626);
+  color: var(--hazard-red, #dc2626);
+}
+
+.modal-backdrop.show {
+  backdrop-filter: blur(4px);
+  background-color: rgba(15, 23, 42, 0.5);
+}
+
+/* --------------------------------------------------------------------------
+   4. Status Alerts & Callout Cards
+   -------------------------------------------------------------------------- */
+.alert-accessway {
+  border-radius: var(--radius-md, 12px);
+  border: 1px solid transparent;
+  padding: var(--space-3, 1rem);
+  font-size: 0.875rem;
+}
+
+.alert-warning-accessway {
+  background-color: var(--warning-amber-light, #fef3c7);
+  border-color: var(--warning-amber, #d97706);
+  color: #92400e;
+}
+
+.alert-danger-accessway {
+  background-color: var(--hazard-red-light, #fee2e2);
+  border-color: var(--hazard-red, #dc2626);
+  color: #991b1b;
+}
+
+.alert-success-accessway {
+  background-color: var(--primary-green-light, #e8f5e9);
+  border-color: var(--primary-green, #1b7a4b);
+  color: var(--primary-green-hover, #135835);
+}
+
+/* --------------------------------------------------------------------------
+   5. Facility Filter Chips & Pill Tags
+   -------------------------------------------------------------------------- */
+.btn-check:checked + .btn-outline-info {
+  background-color: var(--info-blue, #0284c7);
+  border-color: var(--info-blue, #0284c7);
+  color: #ffffff;
+}
+
+.btn-check:checked + .btn-outline-success {
+  background-color: var(--primary-green, #1b7a4b);
+  border-color: var(--primary-green, #1b7a4b);
+  color: #ffffff;
+}
+
+.btn-check:checked + .btn-outline-warning {
+  background-color: var(--warning-amber, #d97706);
+  border-color: var(--warning-amber, #d97706);
+  color: #ffffff;
+}
+
+.btn-check:checked + .btn-outline-danger {
+  background-color: var(--hazard-red, #dc2626);
+  border-color: var(--hazard-red, #dc2626);
+  color: #ffffff;
+}
+
+/* Custom Badges */
+.bg-primary-accessway {
+  background-color: var(--primary-green, #1b7a4b) !important;
+  color: #ffffff !important;
+}
+
+.bg-orange {
+  background-color: #ea580c !important;
+}
+
+/* --------------------------------------------------------------------------
+   6. Step Instruction Cards & Skeletons
+   -------------------------------------------------------------------------- */
+.step-item-card {
+  border-radius: var(--radius-sm, 8px);
+  transition: background-color 0.15s ease;
+}
+
+.step-item-card:hover {
+  background-color: var(--slate-100, #f1f5f9);
+}
+
+.bg-warning-light {
+  background-color: var(--warning-amber-light, #fef3c7);
+}
+
+/* Animated Skeleton Loader Placeholder */
+.skeleton-pulse {
+  background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+  border-radius: var(--radius-sm, 8px);
+}
+
+@keyframes skeleton-loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}

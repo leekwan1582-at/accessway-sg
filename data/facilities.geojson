@@ -1,0 +1,156 @@
+{
+  "type": "FeatureCollection",
+  "name": "AccessWay_SG_Facilities",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+    }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "fac_001",
+        "name": "Dhoby Ghaut MRT Exit B Station Lift",
+        "category": "lift",
+        "accessibleToilet": false,
+        "liftAccess": true,
+        "doorWidth": ">= 900mm",
+        "rampGradient": "Flat (0%)",
+        "address": "Dhoby Ghaut MRT Station, Exit B Corridor",
+        "verified": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [103.845214, 1.298523]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "fac_002",
+        "name": "Plaza Singapura L1 Universal Toilet",
+        "category": "toilet",
+        "accessibleToilet": true,
+        "liftAccess": true,
+        "doorWidth": ">= 850mm",
+        "rampGradient": "Flat (0%)",
+        "address": "Plaza Singapura Level 1 (Near Customer Service)",
+        "verified": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [103.844781, 1.300184]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "fac_003",
+        "name": "Handy Road Barrier-Free Ramp",
+        "category": "ramp",
+        "accessibleToilet": false,
+        "liftAccess": false,
+        "doorWidth": "N/A",
+        "rampGradient": "Low Gradient (4.2%)",
+        "address": "Handy Road Footway Connector",
+        "verified": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [103.84498, 1.29915]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "fac_004",
+        "name": "Somerset MRT Station Concourse Lift",
+        "category": "lift",
+        "accessibleToilet": false,
+        "liftAccess": true,
+        "doorWidth": ">= 900mm",
+        "rampGradient": "Flat (0%)",
+        "address": "313 Orchard Road, Somerset MRT",
+        "verified": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [103.83907, 1.30021]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "fac_005",
+        "name": "313@somerset Accessible Washroom (B2)",
+        "category": "toilet",
+        "accessibleToilet": true,
+        "liftAccess": true,
+        "doorWidth": ">= 850mm",
+        "rampGradient": "Flat (0%)",
+        "address": "313@somerset Basement 2",
+        "verified": false
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [103.83842, 1.30105]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "fac_006",
+        "name": "Orchard Central Sheltered Linkway Ramp",
+        "category": "shelter",
+        "accessibleToilet": false,
+        "liftAccess": false,
+        "doorWidth": "N/A",
+        "rampGradient": "Standard (< 5%)",
+        "address": "181 Orchard Road Sheltered Footway",
+        "verified": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [103.83975, 1.30082]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "fac_007",
+        "name": "Bugis Junction Level 1 Wheelchair Washroom",
+        "category": "toilet",
+        "accessibleToilet": true,
+        "liftAccess": true,
+        "doorWidth": ">= 900mm",
+        "rampGradient": "Flat (0%)",
+        "address": "200 Victoria Street, Bugis Junction",
+        "verified": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [103.85512, 1.30058]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "fac_008",
+        "name": "Bugis MRT Street-Level Accessible Lift",
+        "category": "lift",
+        "accessibleToilet": false,
+        "liftAccess": true,
+        "doorWidth": ">= 900mm",
+        "rampGradient": "Flat (0%)",
+        "address": "Victoria Street / Rochor Road Junction",
+        "verified": true
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [103.8558, 1.30112]
+      }
+    }
+  ]
+}

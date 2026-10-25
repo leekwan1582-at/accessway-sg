@@ -1,0 +1,148 @@
+/* ==========================================================================
+   ACCESSWAY SG - BASE STYLES & ACCESSIBILITY FOUNDATIONS (css/base.css)
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Modern CSS Reset & Box Sizing
+   -------------------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+  scroll-behavior: smooth;
+  height: 100%;
+}
+
+body {
+  font-family: var(--font-sans, 'Inter', -apple-system, BlinkMacSystemFont, sans-serif);
+  color: var(--slate-900, #0f172a);
+  background-color: var(--slate-50, #f8fafc);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+/* --------------------------------------------------------------------------
+   2. Typography Foundations (Dual Typography System)
+   -------------------------------------------------------------------------- */
+h1, h2, h3, h4, h5, h6,
+.font-serif {
+  font-family: var(--font-serif, 'Georgia', serif);
+  color: var(--slate-900, #0f172a);
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+p {
+  margin-bottom: var(--space-3, 1rem);
+  color: var(--slate-700, #334155);
+}
+
+a {
+  color: var(--primary-green, #1b7a4b);
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+}
+
+a:hover {
+  color: var(--primary-green-hover, #135835);
+  text-decoration: underline;
+}
+
+/* Helper Utilities for Text Sizes */
+.extra-small {
+  font-size: 0.75rem; /* 12px */
+  line-height: 1rem;
+}
+
+/* --------------------------------------------------------------------------
+   3. Accessible Focus Rings (WCAG 2.1 AA Compliance)
+   -------------------------------------------------------------------------- */
+/* High-Contrast Emerald Focus Indicator replacing browser default outlines */
+:focus-visible,
+.form-control:focus,
+.form-select:focus,
+.form-check-input:focus,
+.btn:focus-visible {
+  outline: 3px solid var(--primary-green, #1b7a4b) !important;
+  outline-offset: 2px !important;
+  box-shadow: 0 0 0 4px var(--primary-green-light, #e8f5e9) !important;
+  border-color: var(--primary-green, #1b7a4b) !important;
+}
+
+/* Remove default focus for mouse users while preserving keyboard navigation */
+:focus:not(:focus-visible) {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* --------------------------------------------------------------------------
+   4. Touch Ergonomics & Target Baseline
+   -------------------------------------------------------------------------- */
+/* Enforces minimum 44px x 44px touch targets across all primary interactive targets */
+button,
+input,
+select,
+textarea,
+.btn,
+.nav-link,
+.form-check-input {
+  min-height: var(--min-touch-target, 44px);
+  font-family: var(--font-sans, 'Inter', sans-serif);
+}
+
+button,
+.btn {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+}
+
+/* --------------------------------------------------------------------------
+   5. Custom Scrollbar Styling
+   -------------------------------------------------------------------------- */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--slate-100, #f1f5f9);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--slate-500, #64748b);
+  border-radius: var(--radius-sm, 8px);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--slate-700, #334155);
+}
+
+/* --------------------------------------------------------------------------
+   6. Cursor & Interaction Helpers
+   -------------------------------------------------------------------------- */
+.cursor-pointer {
+  cursor: pointer !important;
+}
+
+.z-control {
+  z-index: 800;
+}
+
+.z-top {
+  z-index: 1200;
+}

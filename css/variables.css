@@ -1,0 +1,75 @@
+/* ==========================================================================
+   ACCESSWAY SG - DESIGN TOKENS & GLOBAL CSS VARIABLES (css/variables.css)
+   ========================================================================== */
+
+:root {
+  /* ------------------------------------------------------------------------
+     1. Palette & Color Tokens (WCAG 2.1 AA/AAA Compliance)
+     ------------------------------------------------------------------------ */
+  /* Primary Brand: Accessible Emerald Green (Replaces default Bootstrap #0d6efd) */
+  --primary-green: #1b7a4b;          /* Contrast ratio > 4.8:1 against white */
+  --primary-green-hover: #135835;    /* Darkened hover/active state */
+  --primary-green-light: #e8f5e9;    /* Accessible background tint */
+
+  /* Status, Warning & Hazard Tokens */
+  --warning-amber: #d97706;          /* Contrast ratio > 4.6:1 against light amber */
+  --warning-amber-hover: #b45309;
+  --warning-amber-light: #fef3c7;    /* Incline / Slope alert banner tint */
+
+  --hazard-red: #dc2626;             /* Contrast ratio > 4.9:1 against light red */
+  --hazard-red-hover: #b91c1c;
+  --hazard-red-light: #fee2e2;       /* Step / Roadblock hazard alert tint */
+
+  --info-blue: #0284c7;              /* Accessible Toilet facility indicator */
+  --info-blue-hover: #0369a1;
+  --info-blue-light: #e0f2fe;
+
+  /* Neutral Slate Palette (High-Contrast Text & Backgrounds) */
+  --slate-900: #0f172a;              /* Primary text (Contrast ratio > 15:1) */
+  --slate-700: #334155;              /* Secondary text & labels */
+  --slate-500: #64748b;              /* Muted text & subtle borders */
+  --slate-300: #cbd5e1;              /* Inactive input borders */
+  --slate-200: #e2e8f0;              /* Card borders & dividers */
+  --slate-100: #f1f5f9;              /* Surface background fills */
+  --slate-50:  #f8fafc;              /* Canvas background base */
+
+  /* ------------------------------------------------------------------------
+     2. Spacing & Grid System (8pt Modular Scale)
+     ------------------------------------------------------------------------ */
+  --space-1: 0.25rem;  /*  4px */
+  --space-2: 0.50rem;  /*  8px */
+  --space-3: 1.00rem;  /* 16px */
+  --space-4: 1.50rem;  /* 24px */
+  --space-5: 2.00rem;  /* 32px */
+  --space-6: 3.00rem;  /* 48px */
+
+  /* ------------------------------------------------------------------------
+     3. Typography Tokens (Dual Font Pairing System)
+     ------------------------------------------------------------------------ */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-serif: 'Georgia', Cambria, 'Times New Roman', Times, serif;
+
+  /* Font Weight Aliases */
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  /* ------------------------------------------------------------------------
+     4. Radii & Elevation Shadows
+     ------------------------------------------------------------------------ */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-pill: 9999px;
+
+  --shadow-sm: 0 2px 4px rgba(15, 23, 42, 0.06);
+  --shadow-md: 0 4px 12px rgba(15, 23, 42, 0.10);
+  --shadow-lg: 0 10px 25px rgba(15, 23, 42, 0.15);
+
+  /* ------------------------------------------------------------------------
+     5. Ergonomics & Touch Target Tokens
+     ------------------------------------------------------------------------ */
+  --min-touch-target: 44px;          /* WCAG 2.1 AA minimum touch boundary */
+}

@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="description" content="AccessWay SG - Interactive accessibility mapping and barrier-free route planner for wheelchair and PMA users in Singapore.">
+  <title>AccessWay SG | Accessible Route Planner</title>
+
+  <!-- Google Fonts: Inter & Georgia (Dual Typography System) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Georgia:ital@0;1&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap 5 CSS & Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+  <!-- Leaflet CSS & MarkerCluster Plugin CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
+
+  <!-- AccessWay SG Custom Design System Stylesheets -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/map.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- Skip Navigation Link for Keyboard Accessibility -->
+  <a href="#main-content" class="visually-hidden-focusable p-3 bg-success text-white position-absolute top-0 start-0 z-top">
+    Skip to primary navigation & map controls
+  </a>
+
+  <!-- App Macro Grid Shell -->
+  <div class="app-grid-shell">
+
+    <!-- DESKTOP / TABLET SIDEBAR PANEL (Persistent 380px on Desktop) -->
+    <aside class="sidebar-panel border-end" id="sidebar-panel" aria-label="Route Planner Controls">
+      
+      <!-- Brand Header -->
+      <header class="p-3 border-bottom bg-white d-flex align-items-center justify-content-between">
+        <div class="d-flex align-items-center gap-2">
+          <div class="brand-icon-bg bg-primary-accessway text-white rounded-3 p-2 d-flex align-items-center justify-content-center">
+            <i class="bi bi-person-wheelchair fs-4" aria-hidden="true"></i>
+          </div>
+          <div>
+            <h1 class="h5 mb-0 fw-bold font-serif text-slate-900">AccessWay SG</h1>
+            <p class="small text-muted mb-0 extra-small">Singapore Barrier-Free Navigator</p>
+          </div>
+        </div>
+        <button class="btn btn-outline-secondary btn-sm d-md-none" id="btn-toggle-sidebar" aria-label="Collapse panel">
+          <i class="bi bi-x-lg"></i>
+        </button>
+      </header>
+
+      <!-- Scrollable Sidebar Body -->
+      <div class="sidebar-body p-3 overflow-y-auto flex-grow-1" id="main-content">
+
+        <!-- Route Planner Form -->
+        <form id="route-planner-form" novalidate>
+          <div class="mb-3 position-relative">
+            <label for="input-start" class="form-label fw-semibold small text-slate-700">Starting Location</label>
+            <div class="input-group">
+              <span class="input-group-text bg-light border-end-0"><i class="bi bi-geo-alt-fill text-success"></i></span>
+              <input type="text" class="form-control border-start-0" id="input-start" placeholder="e.g. Dhoby Ghaut MRT" required aria-required="true">
+              <button class="btn btn-outline-secondary" type="button" id="btn-use-location" title="Use current GPS location" aria-label="Use current location">
+                <i class="bi bi-crosshair"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="mb-3 position-relative">
+            <label for="input-dest" class="form-label fw-semibold small text-slate-700">Destination</label>
+            <div class="input-group">
+              <span class="input-group-text bg-light border-end-0"><i class="bi bi-flag-fill text-danger"></i></span>
+              <input type="text" class="form-control border-start-0" id="input-dest" placeholder="e.g. Plaza Singapura" required aria-required="true">
+            </div>
+          </div>
+
+          <!-- Mobility Preferences Dropdown Accordion -->
+          <div class="accordion mb-3" id="preferencesAccordion">
+            <div class="accordion-item border-0 bg-light rounded-3">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed py-2 px-3 small fw-semibold bg-light rounded-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePrefs" aria-expanded="false" aria-controls="collapsePrefs">
+                  <i class="bi bi-sliders me-2"></i> Mobility Preferences
+                </button>
+              </h2>
+              <div id="collapsePrefs" class="accordion-collapse collapse" data-bs-parent="#preferencesAccordion">
+                <div class="accordion-body p-3 pt-1 border-top">
+                  
+                  <!-- Mobility Device Radio Group -->
+                  <label class="form-label extra-small fw-bold text-uppercase text-muted mb-2">Device Type</label>
+                  <div class="d-flex gap-2 mb-3">
+                    <input type="radio" class="btn-check" name="chair-type" id="chair-manual" value="manual" checked>
+                    <label class="btn btn-outline-success btn-sm flex-fill extra-small" for="chair-manual">Manual</label>
+
+                    <input type="radio" class="btn-check" name="chair-type" id="chair-power" value="power">
+                    <label class="btn btn-outline-success btn-sm flex-fill extra-small" for="chair-power">Power Chair</label>
+
+                    <input type="radio" class="btn-check" name="chair-type" id="chair-pma" value="pma">
+                    <label class="btn btn-outline-success btn-sm flex-fill extra-small" for="chair-pma">PMA Scooter</label>
+                  </div>
+
+                  <!-- Route Avoidance Checkboxes -->
+                  <div class="form-check form-switch mb-2">
+                    <input class="form-check-input" type="checkbox" id="chk-avoid-slopes" checked>
+                    <label class="form-check-label small" for="chk-avoid-slopes">Avoid Steep Slopes (>8%)</label>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="chk-prefer-shelter">
+                    <label class="form-check-label small" for="chk-prefer-shelter">Prefer Sheltered Path</label>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Submit CTA Button -->
+          <button type="submit" class="btn btn-primary-accessway w-100 mb-3 shadow-sm" id="search-submit-btn">
+            <i class="bi bi-search me-1"></i> Find Accessible Route
+          </button>
+        </form>
+
+        <!-- Dynamic Form Error Feedback Container -->
+        <div id="form-feedback" aria-live="polite"></div>
+
+        <hr class="my-3">
+
+        <!-- Facility Overlay Toggles (Custom Layer Control) -->
+        <div class="mb-3">
+          <label class="form-label extra-small fw-bold text-uppercase text-muted mb-2">Map Facilities Overlay</label>
+          <div class="d-flex flex-wrap gap-2" id="facility-filter-chips">
+            <input type="checkbox" class="btn-check" id="chk-layer-toilet" checked autocomplete="off">
+            <label class="btn btn-outline-info btn-sm rounded-pill extra-small" for="chk-layer-toilet">
+              <i class="bi bi-person-wheelchair me-1"></i> Toilets
+            </label>
+
+            <input type="checkbox" class="btn-check" id="chk-layer-lift" checked autocomplete="off">
+            <label class="btn btn-outline-success btn-sm rounded-pill extra-small" for="chk-layer-lift">
+              <i class="bi bi-box-arrow-up-right me-1"></i> Station Lifts
+            </label>
+
+            <input type="checkbox" class="btn-check" id="chk-layer-ramp" checked autocomplete="off">
+            <label class="btn btn-outline-warning btn-sm rounded-pill extra-small" for="chk-layer-ramp">
+              <i class="bi bi-sign-post-split me-1"></i> Ramps
+            </label>
+
+            <input type="checkbox" class="btn-check" id="chk-layer-barriers" checked autocomplete="off">
+            <label class="btn btn-outline-danger btn-sm rounded-pill extra-small" for="chk-layer-barriers">
+              <i class="bi bi-exclamation-triangle me-1"></i> Community Hazards
+            </label>
+          </div>
+        </div>
+
+        <!-- Dynamic Results / Step List Container -->
+        <section id="route-results-panel" aria-label="Route Search Results" aria-live="polite">
+          <!-- Populated dynamically via ui-controller.js -->
+        </section>
+
+      </div>
+
+      <!-- Sidebar Footer -->
+      <footer class="p-2 border-top bg-light text-center extra-small text-muted">
+        <span>SCTP AccessWay SG &copy; 2026 | SLA / LTA Map Data</span>
+      </footer>
+    </aside>
+
+
+    <!-- MAP VIEWPORT CANVAS CONTAINER -->
+    <main class="map-viewport" role="main">
+      
+      <!-- Leaflet Map Container Div -->
+      <div id="map-container" tabindex="0" aria-label="Singapore Accessibility Map Canvas"></div>
+
+      <!-- Floating Map Header Bar (Mobile Only) -->
+      <header class="floating-map-header d-md-none position-absolute top-0 start-0 end-0 p-2 z-control d-flex align-items-center justify-content-between">
+        <div class="bg-white rounded-3 shadow-sm px-3 py-2 d-flex align-items-center gap-2 border">
+          <i class="bi bi-person-wheelchair text-success fs-5"></i>
+          <span class="fw-bold font-serif text-slate-900">AccessWay SG</span>
+        </div>
+        <button class="btn btn-white bg-white shadow-sm border rounded-circle p-2" id="btn-open-mobile-planner" aria-label="Open planner sheet">
+          <i class="bi bi-search fs-5 text-slate-700"></i>
+        </button>
+      </header>
+
+      <!-- Floating Action Button (FAB): Community Barrier Reporting Trigger -->
+      <button class="btn btn-danger btn-fab-report shadow-lg rounded-circle position-absolute bottom-0 end-0 m-3 z-control d-flex align-items-center justify-content-center" id="fab-report-barrier" title="Report Path Hazard" aria-label="Report a barrier or hazard">
+        <i class="bi bi-exclamation-triangle-fill fs-4 text-white"></i>
+      </button>
+
+    </main>
+
+  </div>
+
+
+  <!-- MOBILE EXPANDABLE BOTTOM SHEET (Bootstrap Offcanvas Adaptation) -->
+  <div class="offcanvas offcanvas-bottom custom-bottom-sheet d-md-none" tabindex="-1" id="mobileSheet" aria-labelledby="mobileSheetLabel" data-bs-backdrop="false">
+    <div class="sheet-drag-handle" id="sheet-handle" role="button" aria-label="Drag sheet handle"></div>
+    <div class="offcanvas-header py-2 px-3 border-bottom">
+      <h2 class="offcanvas-title h6 fw-bold mb-0" id="mobileSheetLabel">Route Planner & Hazards</h2>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close sheet"></button>
+    </div>
+    <div class="offcanvas-body p-3" id="mobile-sheet-body">
+      <!-- Cloned or mirrored controls populate here dynamically on mobile viewports -->
+    </div>
+  </div>
+
+
+  <!-- COMMUNITY BARRIER REPORT MODAL (CREATE / EDIT) -->
+  <div class="modal fade" id="barrierModal" tabindex="-1" aria-labelledby="barrierModalLabel" aria-hidden="true" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content custom-modal">
+        
+        <div class="modal-header hazard-header">
+          <h5 class="modal-title h6 fw-bold mb-0" id="barrierModalLabel">
+            <i class="bi bi-exclamation-triangle-fill me-2"></i> Report Physical Barrier Hazard
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close modal"></button>
+        </div>
+
+        <form id="barrier-report-form" novalidate>
+          <div class="modal-body p-3">
+            <div id="barrier-form-feedback" class="mb-2" aria-live="polite"></div>
+
+            <input type="hidden" id="barrier-edit-id" value="">
+            <input type="hidden" id="barrier-lat" value="">
+            <input type="hidden" id="barrier-lng" value="">
+
+            <div class="mb-3">
+              <label for="barrier-title" class="form-label small fw-semibold">Location / Obstacle Title *</label>
+              <input type="text" class="form-control" id="barrier-title" placeholder="e.g. Broken Station Lift Exit B" required>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label small fw-semibold">Barrier Category *</label>
+              <div class="row g-2">
+                <div class="col-6">
+                  <input type="radio" class="btn-check" name="barrier-category" id="cat-steps" value="steps" checked>
+                  <label class="btn btn-outline-secondary btn-sm w-100 text-start extra-small" for="cat-steps">
+                    <i class="bi bi-segmented-nav me-1"></i> Steps / Stairs
+                  </label>
+                </div>
+                <div class="col-6">
+                  <input type="radio" class="btn-check" name="barrier-category" id="cat-lift" value="lift">
+                  <label class="btn btn-outline-secondary btn-sm w-100 text-start extra-small" for="cat-lift">
+                    <i class="bi bi-box-arrow-down me-1"></i> Broken Lift
+                  </label>
+                </div>
+                <div class="col-6">
+                  <input type="radio" class="btn-check" name="barrier-category" id="cat-slope" value="slope">
+                  <label class="btn btn-outline-secondary btn-sm w-100 text-start extra-small" for="cat-slope">
+                    <i class="bi bi-graph-up-arrow me-1"></i> Steep Incline
+                  </label>
+                </div>
+                <div class="col-6">
+                  <input type="radio" class="btn-check" name="barrier-category" id="cat-blocked" value="blocked">
+                  <label class="btn btn-outline-secondary btn-sm w-100 text-start extra-small" for="cat-blocked">
+                    <i class="bi bi-slash-circle me-1"></i> Path Blocked
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="barrier-severity" class="form-label small fw-semibold">Hazard Severity Level *</label>
+              <select class="form-select form-select-sm" id="barrier-severity" required>
+                <option value="low">Low (Minor Delay / Alternative Path Available)</option>
+                <option value="medium" selected>Medium (Difficult / Assistance Recommended)</option>
+                <option value="high">High (Passage Impossible for Wheelchairs)</option>
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label for="barrier-notes" class="form-label small fw-semibold">Guidance Notes for Other Users</label>
+              <textarea class="form-control" id="barrier-notes" rows="2" placeholder="e.g. Lift #2 under maintenance until 5 PM. Use Exit C ramp instead."></textarea>
+            </div>
+
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="barrier-confirm-check" required>
+              <label class="form-check-label extra-small text-muted" for="barrier-confirm-check">
+                I confirm this coordinate location pin represents an active physical barrier.
+              </label>
+            </div>
+          </div>
+
+          <div class="modal-footer p-2 bg-light">
+            <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-sm btn-danger px-3" id="btn-submit-barrier">Submit Report</button>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+
+  <!-- External JavaScript Libraries (Bootstrap, Leaflet, MarkerCluster) -->
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+
+  <!-- AccessWay SG Service Modules -->
+  <script type="module" src="./js/app.js"></script>
+</body>
+</html>
